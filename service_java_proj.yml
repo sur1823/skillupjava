@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app-service
+spec:
+  selector:
+    app: hello-app
+  type: NodePort
+  ports:
+  - name: http
+    port: 80           #service port : which Service exposes to other components within the cluster
+    targetPort: 8786      #container port : container (or pod) is listening on, Service will forward traffic from the port(8080) to the targetPort(8080)
+    nodePort: 30080       #node port : port that Service exposes on each node in the cluster. [container]targetport <-- Cluster-port <-- NodeIP:Nodeport <--- [other Nodes or External world]
+    protocol: TCP
